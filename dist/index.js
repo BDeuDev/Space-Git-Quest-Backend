@@ -8,9 +8,10 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const auth_1 = __importDefault(require("./routes/auth"));
+const config_1 = require("./config/config");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
-app.use('/auth', auth_1.default);
-app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+app.use(config_1.BLUEPRINT, auth_1.default);
+app.listen(config_1.PORT, () => {
+    console.log(`Server running on port ${config_1.PORT}`);
 });

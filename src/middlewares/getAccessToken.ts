@@ -45,7 +45,6 @@ export const getAccessToken = async(req:Request,res:Response) => {
             jwt_token 
       }); 
     } catch (error) {
-        console.error(error);
         return res.status(500).json({ error: 'OAuth2 token is not found' });
     }
 }

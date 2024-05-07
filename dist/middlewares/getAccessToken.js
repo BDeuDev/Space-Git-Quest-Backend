@@ -53,7 +53,6 @@ const getAccessToken = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
     catch (error) {
-        console.error(error);
         return res.status(500).json({ error: 'OAuth2 token is not found' });
     }
 });

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const jwt_secret = 'tu_secreto_para_jwt';
+const config_1 = require("../config/config");
 const authToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')[1];
@@ -22,19 +22,18 @@ const authToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(404).json({ message: 'Token not found' });
     }
     try {
-        const data = jsonwebtoken_1.default.verify(token, jwt_secret);
-        console.log(data);
+        const data = jsonwebtoken_1.default.verify(token, config_1.jwt_secret);
         return res.status(200).json({
-            message: 'Token decodificado exitosamente',
+            message: 'Token decoded successfully',
             data
         });
     }
     catch (err) {
         if (err instanceof jsonwebtoken_1.default.TokenExpiredError) {
-            return res.status(403).json({ message: 'Token ha expirado' });
+            return res.status(403).json({ message: 'Token expired' });
         }
         else {
-            return res.status(403).json({ message: 'Token es inválido' });
+            return res.status(403).json({ message: 'Token not valid' });
         }
     }
 });
